@@ -9,11 +9,18 @@ namespace Marketplace.Domain
 
         public Guid Id { get; }
 
-        public ClassifiedAd(Guid id)
+        public ClassifiedAd(Guid id, Guid ownerId)
         {
             if (id == default)
                 throw new ArgumentException("Identity must be specified", nameof(id));
+
+            if (ownerId == default)
+                throw new ArgumentException(
+                "Owner id must be specified", nameof(ownerId));
+
             Id = id;
+
+            _ownerId = ownerId;
         }
 
         // We have added three straightforward methods, and you might feel a bit disappointed because these are property setters (not even glorified). 
@@ -31,6 +38,14 @@ namespace Marketplace.Domain
         private string _text;
 
         private decimal _price;
+
+        public void CreateClassifiedAd(Guid id, Guid ownerId)
+        {
+            var classifiedAd = new ClassifiedAd(id, ownerId);
+            // store the entity somehow
+
+
+        }
     }
 
 
